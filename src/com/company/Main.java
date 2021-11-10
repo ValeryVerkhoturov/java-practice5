@@ -1,16 +1,17 @@
 package com.company;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
+
 
 public class Main {
     public static void main(String[] args) {
         task1();
         task2();
         task3();
+        task4();
+        task5();
     }
 
     public static void task1(){
@@ -25,7 +26,7 @@ public class Main {
 
     public static void task2(){
         try{
-            FileReader fileReader = new FileReader("kakDela.txt");
+            FileReader fileReader = new FileReader("character'sDairy.txt");
         } catch (Exception e) {
             System.out.println("В задании 2 обработалось исключение - " + e.getClass().getName());
         }
@@ -39,7 +40,26 @@ public class Main {
                 System.out.println("В задании 3 обработалось исключение - " + e.getClass().getName());
             }
         });
+        thread.setName("Don't wake up. I sleep");
         thread.start();
         thread.interrupt();
+    }
+
+    public static void task4(){
+        Arrays.stream(Character.randomInstance().getCoins())
+                .limit(0)
+                .findAny()
+                .ifPresentOrElse(System.out::println,
+                        () -> System.out.println(
+                                "В задании 4 обработалось исключение - " + NullPointerException.class.getName()));
+    }
+
+    public static void task5(){
+        try{
+            Character.randomInstance().getName().charAt(-1);
+        }
+        catch(Exception e) {
+            System.out.println("В задании 5 обработалось исключение - " + e.getClass().getName());
+        }
     }
 }
